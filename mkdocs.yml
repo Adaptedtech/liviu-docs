@@ -1,0 +1,68 @@
+site_name: Portal de Documentação do Ecossistema Liviu
+site_url: https://adaptedtech.github.io/docs/
+
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Modo escuro
+    - scheme: slate
+      primary: deep purple
+      accent: lime
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
+    # - navigation.footer
+    - navigation.indexes
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+
+nav:
+  - Início: index.md
+
+  - Liviu Analytics:
+      - Visão geral: liviu-analytics/index.md
+      - Guia do usuário: liviu-analytics/user/user-guide.md
+      - Fluxos: liviu-analytics/user/flow.md
+      - FAQ: liviu-analytics/user/faq.md
+      - Arquitetura: liviu-analytics/tech/architecture.md
+      - Frontend: liviu-analytics/tech/frontend.md
+      - API: liviu-analytics/tech/api.md
+      - Banco de dados: liviu-analytics/tech/database.md
+      - Integrações: liviu-analytics/tech/integrations.md
+
+  - Liviu Content:
+      - Visão geral: liviu-content/index.md
+      - Guia do usuário: liviu-content/user/user-guide.md
+      - Fluxos: liviu-content/user/flow.md
+      - FAQ: liviu-content/user/faq.md
+      - Arquitetura: liviu-content/tech/architecture.md
+      - Frontend: liviu-content/tech/frontend.md
+      - API: liviu-content/tech/api.md
+      - Banco de dados: liviu-content/tech/database.md
+      - Integrações: liviu-content/tech/integrations.md
+
+  - Liviu Flow:
+      - Visão geral: liviu-flow/index.md
+      - Guia do usuário: liviu-flow/user/user-guide.md
+      - Fluxos: liviu-flow/user/flow.md
+      - FAQ: liviu-flow/user/faq.md
+      - Arquitetura: liviu-flow/tech/architecture.md
+      - Frontend: liviu-flow/tech/frontend.md
+      - API: liviu-flow/tech/api.md
+      - Banco de dados: liviu-flow/tech/database.md
+      - Integrações: liviu-flow/tech/integrations.md
