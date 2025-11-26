@@ -1,8 +1,10 @@
-site_name: Portal de Documentação do Ecossistema Liviu
+site_name: Portal de Documentação do LiviuHub
 site_url: https://adaptedtech.github.io/docs/
 
 theme:
   name: material
+  logo: assets/img/logo.png
+  favicon: assets/img/logo.png
   language: pt-BR
   palette:
     - scheme: default
@@ -30,39 +32,67 @@ theme:
     - search.share
     - search.suggest
     - toc.follow
+    
+extra:
+  mermaid: true  # 🔥 habilita suporte nativo ao Mermaid no Material
 
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid      # habilita bloco ```mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
+  
 nav:
   - Início: index.md
 
   - Liviu Analytics:
-      - Visão geral: liviu-analytics/index.md
-      - Guia do usuário: liviu-analytics/user/user-guide.md
-      - Fluxos: liviu-analytics/user/flow.md
-      - FAQ: liviu-analytics/user/faq.md
-      - Arquitetura: liviu-analytics/tech/architecture.md
-      - Frontend: liviu-analytics/tech/frontend.md
-      - API: liviu-analytics/tech/api.md
-      - Banco de dados: liviu-analytics/tech/database.md
-      - Integrações: liviu-analytics/tech/integrations.md
+      - Usuário:
+        - Visão geral: liviu-analytics/index.md
+        - Primeiros passos: liviu-analytics/user/first-access.md
+        - Guia do usuário: liviu-analytics/user/user-guide.md
+        - Fluxos: liviu-analytics/user/flow.md
+        - FAQ: liviu-analytics/user/faq.md
+      - Tecnologia:
+        - Arquitetura: liviu-analytics/tech/architecture.md
+        - Frontend: liviu-analytics/tech/frontend.md
+        - API: liviu-analytics/tech/api.md
+        - Banco de dados: liviu-analytics/tech/database.md
+        - Integrações: liviu-analytics/tech/integrations.md
 
   - Liviu Content:
-      - Visão geral: liviu-content/index.md
-      - Guia do usuário: liviu-content/user/user-guide.md
-      - Fluxos: liviu-content/user/flow.md
-      - FAQ: liviu-content/user/faq.md
-      - Arquitetura: liviu-content/tech/architecture.md
-      - Frontend: liviu-content/tech/frontend.md
-      - API: liviu-content/tech/api.md
-      - Banco de dados: liviu-content/tech/database.md
-      - Integrações: liviu-content/tech/integrations.md
+      - Usuário:
+        - Visão geral: liviu-content/index.md
+        - Guia do usuário: liviu-content/user/user-guide.md
+        - Fluxos: liviu-content/user/flow.md
+        - FAQ: liviu-content/user/faq.md
+      - Tecnologia:
+        - Arquitetura: liviu-content/tech/architecture.md
+        - Frontend: liviu-content/tech/frontend.md
+        - API: liviu-content/tech/api.md
+        - Banco de dados: liviu-content/tech/database.md
+        - Integrações: liviu-content/tech/integrations.md
 
   - Liviu Flow:
-      - Visão geral: liviu-flow/index.md
-      - Guia do usuário: liviu-flow/user/user-guide.md
-      - Fluxos: liviu-flow/user/flow.md
-      - FAQ: liviu-flow/user/faq.md
-      - Arquitetura: liviu-flow/tech/architecture.md
-      - Frontend: liviu-flow/tech/frontend.md
-      - API: liviu-flow/tech/api.md
-      - Banco de dados: liviu-flow/tech/database.md
-      - Integrações: liviu-flow/tech/integrations.md
+      - Usuário: 
+        - Visão geral: liviu-flow/index.md
+        - Guia do usuário: liviu-flow/user/user-guide.md
+        - Fluxos: liviu-flow/user/flow.md
+        - FAQ: liviu-flow/user/faq.md
+      - Tecnologia:
+        - Arquitetura: liviu-flow/tech/architecture.md
+        - Frontend: liviu-flow/tech/frontend.md
+        - API: liviu-flow/tech/api.md
+        - Banco de dados: liviu-flow/tech/database.md
+        - Integrações: liviu-flow/tech/integrations.md
