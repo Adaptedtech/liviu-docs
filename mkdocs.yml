@@ -1,5 +1,5 @@
 site_name: Portal de Documentação do LiviuHub
-site_url: https://adaptedtech.github.io/liviu-docs/docs/
+site_url: https://adaptedtech.github.io/liviu-docs/
 
 theme:
   name: material
