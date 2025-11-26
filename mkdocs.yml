@@ -43,6 +43,7 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.details
+  - pymdownx.tabbed
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid      # habilita bloco ```mermaid
@@ -50,6 +51,10 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: true
+
+plugins:
+  - search
+  - swagger-ui-tag
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
@@ -68,9 +73,7 @@ nav:
         - Arquitetura: liviu-analytics/tech/architecture.md
         - Frontend: liviu-analytics/tech/frontend.md
         - API: liviu-analytics/tech/api.md
-        - Banco de dados: liviu-analytics/tech/database.md
-        - Integrações: liviu-analytics/tech/integrations.md
-
+       
   - Liviu Content:
       - Usuário:
         - Visão geral: liviu-content/index.md
