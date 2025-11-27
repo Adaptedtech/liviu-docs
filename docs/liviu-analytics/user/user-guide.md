@@ -1,218 +1,234 @@
 # Guia Completo do Usuário — Liviu Analytics
 
-Este guia apresenta todas as funcionalidades do **Liviu Analytics**, ajudando você a navegar, interpretar dados e extrair insights para melhorar a aprendizagem e a performance educacional da sua organização.
+O Liviu Analytics é o módulo da AdaptEdTech dedicado à análise de comportamento e engajamento dos usuários dentro dos conteúdos digitais publicados no LMS.  
+Este guia apresenta todas as funcionalidades, telas e métricas de forma clara e objetiva.
 
 ---
 
 ## 1. Introdução ao Liviu Analytics
 
-O **Liviu Analytics** é o módulo responsável por transformar dados educacionais em informações estratégicas.  
-Ele consolida dados de:
+O Liviu Analytics permite que você:
 
--   Acessos
--   Engajamento
--   Evolução de trilhas
--   Conclusão de conteúdos
--   Performance em atividades
--   Comportamento geral dos alunos
+- Visualize relatórios completos por conteúdo.
+- Acompanhe engajamento e tempo de acesso.
+- Analise páginas mais visitadas.
+- Avalie atividades, vídeos e interações.
+- Crie relatórios personalizados.
+- Organize seus relatórios em pastas.
 
-Com isso, você consegue analisar com clareza o impacto real do treinamento e tomar decisões baseadas em evidências.
-
----
-
-## 2. Acesso ao Sistema
-
-Para acessar o Liviu Analytics:
-
-1. Entre na URL fornecida pela sua instituição.
-2. Faça login com seu **e-mail** e **senha**.
-3. Caso seja seu primeiro acesso, altere a senha conforme solicitado.
-4. Você será redirecionado ao **Dashboard Central**.
-
-> ⚠️ Observação: O conteúdo da plataforma pode variar de acordo com o seu nível de permissão.
+Ele é ideal para equipes de T&D, gestores, DI, consultores e coordenadores de conteúdo.
 
 ---
 
-## 3. Dashboard Central
+## 2. Perfis de Usuário
 
-Ao fazer login, você verá o **Dashboard Central**, que exibe:
-
--   Indicadores gerais de aprendizagem
--   Acessos recentes
--   Engajamento por módulo
--   Evolução das trilhas
--   Taxas de conclusão
--   Destaques de desempenho
-
-Essas informações ajudam você a ter uma visão imediata da “saúde” do aprendizado na sua organização.
-
-### Elementos comuns no dashboard
-
--   **Cards de indicadores**: valores chave como engajamento, acessos e conclusão média
--   **Gráficos**: linha, barra, radar e área para visualizações claras
--   **Tabelas comparativas**: por turma, empresa ou grupo
--   **Alertas inteligentes**: pontos de possível evasão ou queda de performance
+| Perfil | Permissões |
+|--------|------------|
+| Administrador | Cria relatórios, gerencia permissões e configurações |
+| Gestor | Cria, edita, visualiza tudo |
+| Designer Instrucional | Analisa dados e otimiza conteúdos |
+| Consultor/B2B | Visualiza relatórios de clientes |
+| Usuário comum | Somente visualiza relatórios compartilhados |
 
 ---
 
-## 4. Menu Lateral
+## 3. Acesso ao Analytics
 
-O menu lateral é sua principal ferramenta de navegação. Ele contém:
-
-### 4.1. **Visão Geral**
-
-Resumo de todos os indicadores principais da organização.
-
-### 4.2. **Engajamento**
-
-Permite visualizar:
-
--   Acessos por período
--   Módulos mais consumidos
--   Tempo de permanência
--   Picos e quedas de atividade
--   Mapas de calor
-
-### 4.3. **Performance**
-
-Mostra:
-
--   Resultados de quizzes
--   Estatísticas de aprendizagem
--   Comparativos entre turmas
--   Pontos fortes e fracos dos alunos
-
-### 4.4. **Trilhas**
-
-Informações sobre:
-
--   Progresso em trilhas completas
--   Jornada do aluno por módulo
--   Gaps de aprendizagem
--   Taxas de abandono
-
-### 4.5. **Relatórios**
-
-Ferramentas para:
-
--   Exportação de dados
--   Geração de análises periódicas
--   Relatórios automáticos
--   Exportação para BI ou dashboards externos
-
-### 4.6. **Configurações**
-
-Aqui você pode ajustar:
-
--   Acesso e permissões
--   Integrações
--   Preferências pessoais
--   Idioma (quando disponível)
+1. Acesse o endereço da plataforma.  
+2. Faça login com sua conta via SSO AdaptEdTech.  
+3. Você será direcionado para a página inicial com a lista de relatórios.
 
 ---
 
-## 5. Módulo de Engajamento
+## 4. Tela Inicial — Relatórios
 
-No módulo **Engajamento**, você pode analisar:
+A primeira tela exibe todos os relatórios que você possui acesso.
 
-### Acessos por período
+### Elementos principais
 
-Veja como o comportamento dos alunos muda ao longo do tempo.
+**Busca:**  
+Campo para encontrar relatórios rapidamente pelo nome.
 
-### Conteúdos mais acessados
+**Lista de relatórios:**  
+Exibe o nome, a data de atualização e o menu de gerenciamento.
 
-Identifique os módulos mais populares.
+**Criar Pasta:**  
+Organize relatórios por categorias, clientes ou projetos.
 
-### Ponto de abandono
-
-Mostra onde alunos tendem a sair do conteúdo.
-
-### Tempo médio de sessão
-
-Avalia quão envolvente é o conteúdo.
+**Criar Relatório:**  
+Botão no canto superior direito que inicia o fluxo para criação de um novo relatório.
 
 ---
 
-## 6. Módulo de Performance
+## 5. Abrindo um Relatório
 
-O módulo **Performance** exibe:
+Ao selecionar um relatório, você verá a página de visualização com:
 
--   Notas de quizzes
--   Porcentagem de acertos
--   Evolução individual por aluno
--   Comparativo entre grupos
-
-O objetivo é facilitar a análise sobre o quanto os alunos estão absorvendo o conteúdo.
+- Título do relatório  
+- Botão de Configurações  
+- Filtro de Período  
+- Navegação por abas  
 
 ---
 
-## 7. Trilhas de Aprendizagem
+## 6. Estrutura de um Relatório
 
-No módulo **Trilhas**, você pode:
-
--   Acompanhar o progresso de cada aluno
--   Ver o avanço por módulo
--   Identificar gargalos
--   Analisar a jornada completa
-
-Esse módulo é essencial para acompanhar resultados em programas de T&D e formações internas.
+O relatório é dividido em abas que mostram diferentes conjuntos de métricas.
 
 ---
 
-## 8. Relatórios e Exportações
+### 6.1 Dados Gerais
 
-O Liviu Analytics permite exportar dados em vários formatos:
+Esta aba apresenta:
 
--   PDF
--   Excel (XLSX)
--   CSV
--   API (para BI)
+- Média de páginas por acesso  
+- Tempo médio de acesso  
+- Tempo médio de ociosidade  
+- Seção de Páginas Visitadas, mostrando:  
+  - páginas mais acessadas  
+  - páginas ignoradas  
+  - ordem de navegação  
 
-### Como exportar:
-
-1. Acesse **Relatórios**
-2. Selecione o tipo desejado
-3. Aplique filtros
-4. Clique em **Exportar**
+Caso não existam dados para o período selecionado, aparecerá a mensagem “Sem dados de visualizações”.
 
 ---
 
-## 9. Permissões de Usuário
+### 6.2 Engajamento
 
-O Liviu Analytics trabalha com diferentes perfis:
+Esta aba pode exibir:
 
--   **Administrador**: acesso total a todos os dados
--   **Gestor Educacional**: performance e engajamento geral
--   **Instrutor**: dados dos alunos sob sua responsabilidade
--   **Operacional**: geração de relatórios e análises
+- Número total de acessos  
+- Acessos únicos  
+- Evolução de acessos por dia  
+- Taxa de retorno  
+- Frequência de uso  
 
-Seu perfil determina quais dashboards e relatórios você verá.
-
----
-
-## 10. Dicas para aproveitamento máximo
-
--   Use filtros para comparar períodos
--   Analise picos e quedas de acesso
--   Verifique pontos de abandono nas trilhas
--   Compare resultados de quizzes por turma
--   Exporte dados antes de reuniões estratégicas
--   Use relatórios para auditorias e compliance
+As métricas variam conforme a configuração do relatório.
 
 ---
 
-## 11. Suporte
+### 6.3 Atividades
 
-Caso precise de ajuda:
+Exibe informações sobre interações feitas dentro do conteúdo, como:
 
-**suporte@adaptedtech.com.br**  
-Ou acesse o painel administrativo para abrir um chamado.
+- Exercícios  
+- Páginas com atividades  
+- Registros internos  
+- Pontos de abandono  
+- Tempo para concluir atividades  
 
 ---
 
-## 12. Conclusão
+### 6.4 Vídeos
 
-O **Liviu Analytics** é uma ferramenta poderosa para transformar informação em ação.  
-Com ele, você consegue acompanhar de perto o desempenho dos alunos e tomar decisões embasadas que impactam diretamente a qualidade da aprendizagem.
+Exibe dados referentes a vídeos presentes no conteúdo, incluindo:
 
-Explore, filtre, compare e descubra os insights que farão a diferença na sua organização! 💛
+- Tempo assistido  
+- Porcentagem concluída  
+- Taxa de abandono  
+- Trechos mais assistidos  
+
+---
+
+## 7. Filtros de Período
+
+O botão de período permite aplicar filtros como:
+
+- Hoje  
+- Últimos 7 dias  
+- Últimos 30 dias  
+- Últimos 12 meses  
+- Período personalizado  
+
+Todos os gráficos e dados se atualizam automaticamente após aplicar o filtro.
+
+---
+
+## 8. Configurações do Relatório
+
+Na área de Configurações você pode:
+
+- Editar título  
+- Alterar conteúdos vinculados  
+- Escolher quais abas aparecem  
+- Selecionar métricas exibidas  
+- Ajustar o período padrão  
+- Gerenciar permissões de visualização  
+- Categorizar o relatório  
+
+Isso permite construir relatórios específicos para:
+
+- cursos  
+- clientes corporativos  
+- trilhas de aprendizagem  
+- auditorias  
+
+---
+
+## 9. Interpretação das Métricas
+
+**Média de páginas por acesso:**  
+Indica o quanto os usuários exploram o conteúdo.
+
+**Tempo médio de acesso:**  
+Mostra o tempo médio de atividade real.
+
+**Tempo médio de ociosidade:**  
+Ajuda a entender momentos de distração ou falta de clareza em algumas páginas.
+
+**Páginas visitadas:**  
+Identifica:
+
+- pontos de maior interesse  
+- páginas ignoradas  
+- possíveis gargalos  
+- padrões de navegação  
+
+---
+
+## 10. Mensagens e Cenários Comuns
+
+**"Sem dados de visualizações":**  
+Pode acontecer se:
+- não houve acessos  
+- o período filtrado está incorreto  
+- o conteúdo não está enviando eventos SCORM  
+
+**Relatório sem dados mesmo com acessos:**  
+Verifique se:
+- o conteúdo está vinculado corretamente  
+- os dados SCORM estão chegando  
+- o período filtrado abrange os acessos  
+
+**Atraso na atualização dos dados:**  
+Alguns ambientes sincronizam dados em intervalos.
+
+---
+
+## 11. Quem Pode Criar Relatórios
+
+Em geral podem criar relatórios:
+
+- Administradores  
+- Gestores  
+- Times de T&D  
+- Coordenadores  
+- Consultores B2B  
+
+Usuários comuns podem apenas visualizar.
+
+---
+
+## 12. Suporte
+
+Se precisar de ajuda:
+
+- Acesse esta documentação  
+- Verifique tutoriais internos  
+- Consulte o suporte AdaptEdTech  
+- Abra um ticket com:
+  - nome do relatório  
+  - período filtrado  
+  - screenshot  
+  - conteúdo analisado  
+

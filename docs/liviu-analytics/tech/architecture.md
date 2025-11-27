@@ -1,180 +1,334 @@
-# Arquitetura — Liviu Analytics
+# Arquitetura Técnica — Liviu Analytics
 
-Esta página descreve a arquitetura do **Liviu Analytics**, considerando sua operação atual:  
-**todos os dados consumidos pelo Analytics vêm exclusivamente do SCORM Tracking**, através de eventos xAPI/SCORM enviados pelo LMS para o backend da AdaptEdTech.
-
-A seguir, você encontrará a visão completa dos componentes, processamento e visualização.
+O Liviu Analytics é responsável por processar, armazenar e exibir dados de navegação, engajamento, atividades e vídeos provenientes dos conteúdos publicados no LMS.  
+Esta arquitetura foi atualizada com a estrutura e fluxo atual do produto.
 
 ---
 
-## Visão Geral da Arquitetura
+# 1. Visão Geral da Arquitetura
 
-O fluxo do Liviu Analytics é composto por:
+O módulo é composto por quatro camadas principais:
 
--   **SCORM Tracking (xAPI/Statements)** → única origem de dados
--   **Camada de Ingestão (evento → fila → worker)**
--   **Camada de Processamento e Normalização**
--   **Banco Analítico (data warehouse)**
--   **API do Liviu Analytics**
--   **Dashboards / Relatórios (Frontend)**
--   **Segurança e SSO**
+1. Coleta de dados (SCORM Tracking e eventos de leitura)
+2. Processamento e normalização dos eventos
+3. Armazenamento dos dados analíticos
+4. Consultas e exibição no painel do Liviu Analytics
+
+Ele se integra nativamente com o LMS da AdaptEdTech e com o Liviu Content.
 
 ---
 
-## Diagrama de Alto Nível
+# 2. Fluxo Geral de Funcionamento
+
+A seguir está o fluxo completo dos dados, desde o usuário consumindo conteúdo até a exibição no painel:
 
 ```mermaid
 flowchart LR
-    subgraph Origens["Origem de Dados"]
-        SCORM["SCORM Tracking / xAPI<br/>LMS envia statements"]
-    end
-
-    subgraph Ingest["Ingestão de Eventos"]
-        EVT["Endpoint de Recepção de Eventos"]
-        QUEUE["Fila (Queue/Topic)"]
-        WORK["Workers / ETL"]
-    end
-
-    subgraph Proc["Processamento & Modelo Analítico"]
-        DW["DB Analítico / Data Warehouse"]
-        AGG["Serviço de Agregação<br/>e Métricas"]
-    end
-
-    subgraph API["API Liviu Analytics"]
-        APIA["API REST"]
-        AUTH["SSO / Tokens JWT"]
-    end
-
-    subgraph UI["Visualização"]
-        DASH["Dashboards Web"]
-        REPORT["Relatórios PDF / Excel / CSV"]
-    end
-
-    SCORM --> EVT
-    EVT --> QUEUE
-    QUEUE --> WORK
-    WORK --> DW
-    DW --> AGG
-    AGG --> APIA
-    APIA --> DASH
-    APIA --> REPORT
-    AUTH --> APIA
+    A[Usuário consome conteúdo no LMS] --> B[SCORM Tracking]
+    B --> C[Coleta de eventos de página, vídeo e atividades]
+    C --> D[Serviço de Ingestão Analytics]
+    D --> E[Processamento e normalização]
+    E --> F[Armazenamento em banco analítico]
+    F --> G[API Analytics]
+    G --> H[Interface do Liviu Analytics]
 ```
 
----
+# 3. Coleta de Dados
 
-## Componentes Principais
+A coleta de dados do Liviu Analytics ocorre diretamente a partir do consumo dos conteúdos publicados no LMS. Cada interação do usuário dentro do player gera eventos que são enviados ao servidor de Tracking.
 
-### 1. Origem de Dados: SCORM Tracking
+Os principais tipos de eventos coletados são:
 
-O Liviu Analytics recebe apenas eventos SCORM/xAPI enviados pelo LMS:
+## 3.1 Eventos de Página
 
--   `Page viewed`
--   `Module launched`
--   `Module completed`
--   `Passed / Failed`
--   `Question answered`
--   `Time spent`
--   `Interaction data`
--   `Progress %`
+-   entrada em uma página
+-   saída de uma página
+-   tempo ativo dentro da página
+-   tempo ocioso
+-   ordem de navegação
 
-### 2. Camamada de Ingestão
+## 3.2 Eventos de Vídeo
 
-Responsável por:
+-   iniciar reprodução
+-   pausar
+-   continuar
+-   finalizar
+-   porcentagem assistida
+-   trechos mais assistidos
 
--   Receber os eventos SCORM enviados pelo LMS
--   Validar estrutura
--   Enfileirar para processamento
--   Garantir resiliência caso haja picos de tráfego
+## 3.3 Eventos de Atividade
 
-Fluxo resumido:
+Dependendo do conteúdo, podem incluir:
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant LMS as LMS
-    participant EVT as Endpoint xAPI
-    participant QUEUE as Fila
-    participant WORK as Worker
-    participant DW as DB Analítico
+-   respostas a questões internas
+-   ações dentro de atividades interativas
+-   registros de envio
 
-    LMS->>EVT: Envia SCORM/xAPI Statement
-    EVT->>QUEUE: Enfileira evento bruto
-    QUEUE->>WORK: Worker consome eventos
-    WORK->>WORK: Normaliza / valida / converte
-    WORK->>DW: Insere registros analíticos
-    DW-->>WORK: Confirma processamento
-```
+## 3.4 Tecnologias Utilizadas na Coleta
 
-### 3. API Liviu Analytics
+-   SCORM 1.2
+-   SCORM 2004
+-   Eventos proprietários do player AdaptEdTech
+-   Webhooks internos
 
-A API expõe endpoints para:
-
--   Engajamento
--   Conclusão
--   Evolução de conteúdo
--   Performance
--   Interações
--   Relatórios
--   Filtros avançados (empresa, turma, conteúdo, período)
-
-Fluxo:
-
-```mermaid
-flowchart LR
-    FE["Frontend Analytics"] --> API["API Analytics"]
-    API --> DW["DB Analítico"]
-    API --> AUTH["SSO / JWT"]
-```
-
-### 4. Visualização (Dashboards e Relatórios)
-
-O frontend consome a API para renderizar:
-
--   Indicadores gerais
--   Taxas de conclusão
--   Tempo médio estudado
--   Progresso por trilha
--   Performance em questões
--   Picos e quedas de engajamento
+Os dados são enviados automaticamente pelo LMS, sem necessidade de configuração manual do usuário.
 
 ---
 
-## Segurança e SSO
+# 4. Pipeline de Ingestão
 
--   Autenticação central via Auth/SSO AdaptEdTech
+Os eventos enviados pelo LMS passam por um pipeline de ingestão responsável por processar e transformar as informações antes de armazená-las.
 
--   Tokens JWT com:
+O pipeline inclui:
 
-    -   Empresa
-    -   Permissões
-    -   Escopo
-    -   Perfil
+## 4.1 Validação
 
--   Consultas sempre filtradas por tenant
--   Auditoria de requisições
+-   Estrutura dos eventos
+-   Autenticação da origem
+-   Presença de campos obrigatórios
+
+## 4.2 Normalização
+
+Todos os eventos são convertidos para um formato padronizado que facilita consultas e agregações.
+
+Exemplos:
+
+-   conversão de timestamps
+-   limpeza de campos
+-   identificação da sessão do usuário
+
+## 4.3 Enriquecimento
+
+O serviço complementa os eventos com metadados como:
+
+-   conteúdo associado
+-   tenant/empresa
+-   configuração do relatório
+-   sessão do usuário
+-   versão do conteúdo
+
+## 4.4 Armazenamento Inicial
+
+Os dados normalizados são inseridos em tabelas de eventos crus (`raw_events`) antes de serem processados para agregações.
 
 ---
 
-## Observabilidade
+# 5. Banco de Dados Analítico
 
-Monitoramento cobre:
+O banco analítico é otimizado para consultas rápidas e agregações complexas. Ele armazena desde eventos brutos até indicadores já calculados.
 
--   Falhas de ingestão SCORM
--   Atraso de workers
--   Eventos inválidos
--   Tempo de processamento por lote
--   Latência das APIs
--   Load dos dashboards
+## 5.1 Camadas de Dados
+
+### Dados Brutos (Raw)
+
+-   eventos SCORM
+-   eventos de vídeo
+-   eventos de página
+-   eventos de atividade
+
+### Dados Processados (Processed)
+
+-   sessões de navegação
+-   tempo ativo
+-   páginas visitadas
+-   métricas consolidadas
+
+### Dados Agregados (Aggregated)
+
+-   média de páginas por acesso
+-   tempo médio de acesso
+-   tempo médio de ociosidade
+-   desempenho de vídeos
+
+## 5.2 Tabelas Principais
+
+-   `raw_events`
+-   `page_views`
+-   `video_events`
+-   `sessions`
+-   `reports`
+-   `reports_pages`
+-   `reports_videos`
+-   `reports_engagement`
+
+## 5.3 Banco Suportado
+
+O banco utilizado pode variar por cliente, mas a estrutura atual suporta:
+
+-   PostgreSQL
+-   TimescaleDB
+-   Redshift
+-   ClickHouse
 
 ---
 
-## CI/CD
+# 6. API Analytics
 
-Pipeline:
+A API é a responsável por fornecer todos os dados consumidos pela interface do Liviu Analytics. Ela recebe filtros, processa métricas e retorna as informações agregadas.
 
--   Validar ingestão
--   Testar conversões SCORM → analítico
--   Aplicar migrações de schema
--   Deploy da API
--   Deploy do frontend
+## 6.1 Funcionalidades Principais
+
+-   criação de relatórios
+-   listagem e organização
+-   retorno de métricas por período
+-   busca de páginas visitadas
+-   dados de engajamento
+-   dados de vídeo
+-   dados de atividades
+-   exportação de dados (quando habilitado)
+
+## 6.2 Autenticação
+
+A API utiliza:
+
+-   autenticação via SSO
+-   token JWT válido
+-   verificação de permissões por tenant
+
+## 6.3 Endpoints Principais
+
+### Relatórios
+
+-   GET `/reports`
+-   POST `/reports`
+-   GET `/reports/{id}`
+
+### Dados Gerais
+
+-   GET `/reports/{id}/stats`
+
+### Páginas
+
+-   GET `/reports/{id}/pages`
+
+### Engajamento
+
+-   GET `/reports/{id}/engagement`
+
+### Atividades
+
+-   GET `/reports/{id}/activities`
+
+### Vídeos
+
+-   GET `/reports/{id}/videos`
+
+---
+
+# 7. Interface do Liviu Analytics
+
+A interface é responsável por transformar os dados da API em gráficos, tabelas e indicadores claros. Ela funciona como uma SPA (Single Page Application).
+
+## 7.1 Estrutura Principal da Interface
+
+A interface contém:
+
+-   lista de relatórios
+-   criação e organização de pastas
+-   visualização completa do relatório
+-   navegação por abas:
+    -   Dados Gerais
+    -   Engajamento
+    -   Atividades
+    -   Vídeos
+-   filtros avançados de período
+-   configurações do relatório
+
+## 7.2 Elementos Internos
+
+-   gráficos agregados
+-   métricas principais
+-   tabelas detalhadas
+-   painel de páginas mais acessadas
+-   análise de vídeos
+
+---
+
+# 8. Estrutura de Relatórios
+
+Um relatório no Liviu Analytics é composto por:
+
+## 8.1 Metadados
+
+-   nome
+-   descrição
+-   criação e atualização
+-   empresa/tenant
+-   usuário responsável
+
+## 8.2 Configurações
+
+-   período padrão
+-   abas habilitadas
+-   conteúdos vinculados
+-   permissões de acesso
+
+## 8.3 Dados Analíticos
+
+Cada relatório é gerado a partir dos eventos coletados e inclui:
+
+-   métricas gerais
+-   evolução temporal
+-   página a página
+-   vídeo a vídeo
+-   atividades e interações
+
+---
+
+# 9. Tecnologias Utilizadas
+
+O Liviu Analytics utiliza tecnologias modernas para garantir escala e segurança.
+
+## 9.1 Backend
+
+-   Python
+-   FastAPI
+-   Serviço de ingestão assíncrono
+-   JWT
+-   Integração SSO AdaptEdTech
+
+## 9.2 Frontend
+
+-   Framework SPA (React)
+-   Recharts ou ECharts para gráficos
+-   Comunicação via REST
+
+## 9.3 Tracking
+
+-   SCORM (1.2 e 2004)
+-   Eventos proprietários
+-   Player AdaptEdTech
+
+---
+
+# 10. Segurança e Controle de Acesso
+
+O sistema aplica:
+
+-   controle por tenant
+-   permissões por usuário
+-   tokens JWT
+-   HTTPS obrigatório
+-   isolamento completo entre clientes
+-   logs de auditoria
+-   proteção contra manipulação de eventos
+
+---
+
+# 11. Limitações e Observações
+
+-   Dependência total dos eventos enviados pelo conteúdo SCORM.
+-   Conteúdos que não enviam eventos não geram dados.
+-   Vídeos externos podem não fornecer todos os eventos.
+-   Relatórios dependem do período selecionado.
+-   Dados podem ter atraso em ambientes com sincronização agendada.
+
+---
+
+# 12. Documentos Relacionados
+
+-   Primeiros Passos — `../user/primeiros-passos.md`
+-   Guia do Usuário — `../user/guia-do-usuario.md`
+-   Frontend — `frontend.md`
+-   API Analytics — `api.md`
+-   FAQ — `../user/faq.md`

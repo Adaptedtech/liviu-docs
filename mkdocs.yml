@@ -69,7 +69,7 @@ nav:
         - Guia do usuário: liviu-analytics/user/user-guide.md
         - Fluxos: liviu-analytics/user/flow.md
         - FAQ: liviu-analytics/user/faq.md
-      - Tecnologia:
+      - Documentação Técnica:
         - Arquitetura: liviu-analytics/tech/architecture.md
         - Frontend: liviu-analytics/tech/frontend.md
         - API: liviu-analytics/tech/api.md
@@ -80,7 +80,7 @@ nav:
         - Guia do usuário: liviu-content/user/user-guide.md
         - Fluxos: liviu-content/user/flow.md
         - FAQ: liviu-content/user/faq.md
-      - Tecnologia:
+      - Documentação Técnica:
         - Arquitetura: liviu-content/tech/architecture.md
         - Frontend: liviu-content/tech/frontend.md
         - API: liviu-content/tech/api.md
@@ -93,7 +93,7 @@ nav:
         - Guia do usuário: liviu-flow/user/user-guide.md
         - Fluxos: liviu-flow/user/flow.md
         - FAQ: liviu-flow/user/faq.md
-      - Tecnologia:
+      - Documentação Técnica:
         - Arquitetura: liviu-flow/tech/architecture.md
         - Frontend: liviu-flow/tech/frontend.md
         - API: liviu-flow/tech/api.md

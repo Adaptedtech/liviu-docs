@@ -1,7 +1,7 @@
 # Portal de Documentação do LiviuHub
 
-Bem-vindo ao **Portal de Documentação da AdaptEdTech**.  
-Aqui você encontra toda a documentação oficial dos nossos produtos — organizada, atualizada e pensada para facilitar o trabalho de usuários, desenvolvedores, instrutores e parceiros educacionais.
+Bem-vindo ao **Portal de Documentação da LiviuHub**.  
+Aqui você encontra toda a documentação oficial dos nossos produtos — organizada, atualizada e pensada para facilitar o trabalho de usuários, desenvolvedores e clientes.
 
 Este portal segue a metodologia **Docs-as-Code**, garantindo que cada atualização de software venha acompanhada da documentação correspondente.
 
@@ -9,58 +9,89 @@ Este portal segue a metodologia **Docs-as-Code**, garantindo que cada atualizaç
 
 ## Produtos Documentados
 
-### **1. Liviu Analytics**
+### **Liviu Analytics**
+
 Documentação completa incluindo:
 
-- Guia do Usuário  
-- Arquitetura  
-- API  
-- Front-end  
-- Banco de Dados  
-- Fluxos de negócio  
+-   Usuário:
 
-👉 *Acesse no menu lateral ou clique aqui:*  
-**[Documentação Liviu Analytics](liviu-analytics/index.md)**
+    -   Primeiros Passos
+    -   Guia do Usuário
+    -   Fluxos
+    -   FAQ
 
----
+-   Desenvolvedores:
+    -   Arquitetura
+    -   API
+    -   Frontend
 
-### **2. Liviu Content**
-Inclui:
-
-- Manual do usuário  
-- Estrutura técnica  
-- API e modelos de payload  
-- Integrações  
-- Padrões visuais e componentes  
-
-👉 **[Documentação Liviu Content](liviu-content/index.md)**
+👉 _Acesse no menu superior ou clique aqui:_ **[Documentação Liviu Analytics](liviu-analytics/index.md)**
 
 ---
 
-### **3. Liviu Flow**
+### **Liviu Content**
+
 Inclui:
 
-- Tutoriais  
-- Arquitetura da solução  
-- Endpoints e autenticação  
-- Front-end e estilização  
-- Base de dados e entidades  
+-   Usuário:
 
-👉 **[Documentação Liviu Flow](liviu-flow/index.md)**
+    -   Primeiros Passos
+    -   Guia do Usuário
+    -   Fluxos
+    -   FAQ
+
+-   Desenvolvedores:
+    -   Arquitetura
+    -   API
+    -   Frontend
+
+👉 _Acesse no menu superior ou clique aqui:_ **[Documentação Liviu Content](liviu-content/index.md)**
+
+---
+
+### **Liviu Flow**
+
+Inclui:
+
+-   Usuário:
+
+    -   Primeiros Passos
+    -   Guia do Usuário
+    -   Fluxos
+    -   FAQ
+
+-   Documentação Técnica:
+    -   Arquitetura
+    -   API
+    -   Frontend
+
+👉 _Acesse no menu superior ou clique aqui:_ **[Documentação Liviu Flow](liviu-flow/index.md)**
 
 ---
 
 ## Como navegar neste portal
-Use o menu lateral esquerdo para navegar entre:
 
-- **Início**  
-- **Produtos**  
-- **Guia do Usuário**  
-- **Documentação Técnica**  
-- **Arquitetura**  
-- **API (Swagger/OpenAPI)**  
-- **Integrações**  
-- **Fluxos de negócio**  
+Use o menu superior para navegar entre:
+
+-   Inicio
+-   Liviu Analytics
+-   Liviu Content
+-   Liviu Flow
+
+E use o menu lateral esquerdo para navegar entre:
+
+-   **Início**
+-   **Usuários**
+
+    -   Primeiros Passos
+    -   Guia do Usuário
+    -   Fluxos
+    -   FAQ
+
+-   **Documentação Técnica**
+    -   Arquitetura
+    -   API
+    -   Frontend
 
 Todas as páginas são criadas com foco em clareza, escala e experiência do usuário.
 
@@ -102,12 +133,11 @@ docs/
 
 Cada produto possui:
 
-- `user/` -> documentação do usuário
-- `tech/` -> documentação técnica
-- `tech/api/` -> Swagger/OpenAPI/ endpoints
-- `arquitetura.md` -> Diagramas mermaid
-- `frontend.md` / `backend.md`
-
+-   `user/` -> documentação do usuário
+-   `tech/` -> documentação técnica
+-   `tech/api/` -> Swagger/OpenAPI/ endpoints
+-   `arquitetura.md` -> Diagramas mermaid
+-   `frontend.md` / `backend.md`
 
 ---
 
