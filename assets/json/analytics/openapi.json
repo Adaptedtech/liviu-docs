@@ -1,0 +1,2114 @@
+{
+    "openapi": "3.1.0",
+    "info": { "title": "FastAPI", "version": "0.1.0" },
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Root",
+                "operationId": "root__get",
+                "responses": {
+                    "200": { "description": "Successful Response", "content": { "application/json": { "schema": {} } } }
+                }
+            }
+        },
+        "/auth/users/me": {
+            "get": {
+                "tags": ["auth"],
+                "summary": "Read Users Me",
+                "operationId": "read_users_me_auth_users_me_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+                    }
+                },
+                "security": [{ "OAuth2PasswordBearer": [] }]
+            }
+        },
+        "/events/scorm": {
+            "post": {
+                "tags": ["events"],
+                "summary": "Scorm Event",
+                "operationId": "scorm_event_events_scorm_post",
+                "responses": {
+                    "200": { "description": "Successful Response", "content": { "application/json": { "schema": {} } } }
+                }
+            }
+        },
+        "/events/form": {
+            "post": {
+                "tags": ["events"],
+                "summary": "Form Event",
+                "operationId": "form_event_events_form_post",
+                "responses": {
+                    "200": { "description": "Successful Response", "content": { "application/json": { "schema": {} } } }
+                }
+            }
+        },
+        "/template_form": {
+            "get": {
+                "tags": ["template_form"],
+                "summary": "Get Template Form",
+                "description": "Get all template forms.\n\nArgs:\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    List[Form]: The list of template forms.",
+                "operationId": "get_template_form_template_form_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": { "$ref": "#/components/schemas/TemplateForm" },
+                                    "type": "array",
+                                    "title": "Response Get Template Form Template Form Get"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{ "OAuth2PasswordBearer": [] }]
+            },
+            "post": {
+                "tags": ["template_form"],
+                "summary": "Create Template Form",
+                "description": "Create a template form.\n\nArgs:\n    template_form (TemplateForm): Template form to be created.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    TemplateForm: The created template form.",
+                "operationId": "create_template_form_template_form_post",
+                "requestBody": {
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TemplateForm" } } },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TemplateForm" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                },
+                "security": [{ "OAuth2PasswordBearer": [] }]
+            }
+        },
+        "/template_form/{template_form_id}": {
+            "patch": {
+                "tags": ["template_form"],
+                "summary": "Update Template Form By Id",
+                "description": "Update a template form by id.\n\nArgs:\n    template_form_id (int): Id of the template form to be updated.\n    template_form (TemplateForm): Template form with updated values.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    TemplateForm: The updated template form.",
+                "operationId": "update_template_form_by_id_template_form__template_form_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "template_form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Template Form Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TemplateForm" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TemplateForm" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["template_form"],
+                "summary": "Delete Template Form By Id",
+                "description": "Delete a template form by id.\n\nArgs:\n    template_form_id (int): Id of the template form to be deleted.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    None",
+                "operationId": "delete_template_form_by_id_template_form__template_form_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "template_form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Template Form Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/template_form/{template_form_id}/template_content_block": {
+            "get": {
+                "tags": ["template_form"],
+                "summary": "Get Template Content Block By Id",
+                "description": "Get a content block by id.\n\nArgs:\n    content_block_id (int): Id of the content block.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ContentBlock: The content block.",
+                "operationId": "get_template_content_block_by_id_template_form__template_form_id__template_content_block_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "template_form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Template Form Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/TemplateContentBlock" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/template_content_block": {
+            "post": {
+                "tags": ["template_form"],
+                "summary": "Create Template Content Block",
+                "description": "Create a content block.\n\nArgs:\n    content_block (ContentBlock): Content block to be created.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ContentBlock: The created content block.",
+                "operationId": "create_template_content_block_template_content_block_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": { "schema": { "$ref": "#/components/schemas/TemplateContentBlock" } }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/TemplateContentBlock" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                },
+                "security": [{ "OAuth2PasswordBearer": [] }]
+            }
+        },
+        "/template_content_block/{template_content_block_id}": {
+            "patch": {
+                "tags": ["template_form"],
+                "summary": "Update Template Content Block By Id",
+                "description": "Update a content block by id.\n\nArgs:\n    content_block_id (int): Id of the content block to be updated.\n    content_block (ContentBlock): Content block with updated values.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ContentBlock: The updated content block.",
+                "operationId": "update_template_content_block_by_id_template_content_block__template_content_block_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "template_content_block_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Template Content Block Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": { "schema": { "$ref": "#/components/schemas/TemplateContentBlock" } }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/TemplateContentBlock" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["template_form"],
+                "summary": "Delete Template Content Block By Id",
+                "description": "Delete a content block by id.\n\nArgs:\n    content_block_id (int): Id of the content block to be deleted.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    None",
+                "operationId": "delete_template_content_block_by_id_template_content_block__template_content_block_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "template_content_block_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Template Content Block Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/folder_form": {
+            "post": {
+                "tags": ["folder_form"],
+                "summary": "Create Folder Form",
+                "description": "Create a folder form.\n\nArgs:\n    folder_form (FormFolder): Folder form to be created.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    FormFolder: The created folder form.",
+                "operationId": "create_folder_form_folder_form_post",
+                "requestBody": {
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FormFolder" } } },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FormFolder" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                },
+                "security": [{ "OAuth2PasswordBearer": [] }]
+            }
+        },
+        "/folder_form/{folder_id}": {
+            "patch": {
+                "tags": ["folder_form"],
+                "summary": "Update Folder Form By Id",
+                "description": "Update a folder form by id.\n\nArgs:\n    folder_id (int): Id of the folder form to be updated.\n    folder_form (FormFolder): Folder form with updated values.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    FormFolder: The updated folder form.",
+                "operationId": "update_folder_form_by_id_folder_form__folder_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "folder_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Folder Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FormFolder" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FormFolder" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["folder_form"],
+                "summary": "Delete Folder Form By Id",
+                "description": "Delete a folder form by id.\n\nArgs:\n    folder_id (int): Id of the folder form to be deleted.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    None",
+                "operationId": "delete_folder_form_by_id_folder_form__folder_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "folder_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Folder Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/form": {
+            "get": {
+                "tags": ["form"],
+                "summary": "Get Form",
+                "description": "Get all forms of the current user.\n\nArgs:\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    List[Form]: The list of forms of the current user.",
+                "operationId": "get_form_form_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "folder_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "anyOf": [
+                                            { "$ref": "#/components/schemas/FormResponse" },
+                                            { "$ref": "#/components/schemas/FormFolderResponse" }
+                                        ]
+                                    },
+                                    "title": "Response Get Form Form Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["form"],
+                "summary": "Create Form",
+                "description": "Create a form.\n\nArgs:\n    form (Form): Form to be created.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    Form: The created form.",
+                "operationId": "create_form_form_post",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "template_form_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Template Form Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Form" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Form" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/form/{form_id}": {
+            "get": {
+                "tags": ["form"],
+                "summary": "Get Form By Id",
+                "description": "Get a form by id.\n\nArgs:\n    form_id (int): Id of the form.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    Form: Form matching the given id.",
+                "operationId": "get_form_by_id_form__form_id__get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Form Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Form" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["form"],
+                "summary": "Update Form By Id",
+                "description": "Update a form by id.\n\nArgs:\n    form_id (int): Id of the form to be updated.\n    form (Form): Form with updated values.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    Form: The updated form.",
+                "operationId": "update_form_by_id_form__form_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Form Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Form" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Form" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["form"],
+                "summary": "Delete Form By Id",
+                "description": "Delete a form by id.\n\nArgs:\n    form_id (int): Id of the form to be deleted.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    Form: The deleted form.",
+                "operationId": "delete_form_by_id_form__form_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Form Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Form" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/form/{form_id}/answers": {
+            "get": {
+                "tags": ["form_answer"],
+                "summary": "Get Form Answers",
+                "description": "Get all answers of a form.\n\nArgs:\n    form_id (int): Id of the form.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    List[FormAnswer]: The list of answers of the form.",
+                "operationId": "get_form_answers_form__form_id__answers_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Form Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/FormAnswerResponse" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/form/{form_id}/content_blocks": {
+            "get": {
+                "tags": ["content_block"],
+                "summary": "Get Content Blocks",
+                "description": "Get all content blocks of a form.\n\nArgs:\n    form_id (int): Id of the form.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    List[ContentBlock]: The list of content blocks of the form.",
+                "operationId": "get_content_blocks_form__form_id__content_blocks_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Form Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "$ref": "#/components/schemas/ContentBlock" },
+                                    "title": "Response Get Content Blocks Form  Form Id  Content Blocks Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["content_block"],
+                "summary": "Create Content Block",
+                "description": "Create a content block.\n\nArgs:\n    form_id (int): Id of the form.\n    content_block (ContentBlock): Content block to be created.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ContentBlock: The created content block.",
+                "operationId": "create_content_block_form__form_id__content_blocks_post",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Form Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ContentBlock" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ContentBlock" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/content_blocks/{content_block_id}": {
+            "get": {
+                "tags": ["content_block"],
+                "summary": "Get Content Block By Id",
+                "description": "Get a content block by id.\n\nArgs:\n    form_id (int): Id of the form.\n    content_block_id (int): Id of the content block.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ContentBlock: Content block matching the given id.",
+                "operationId": "get_content_block_by_id_content_blocks__content_block_id__get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "content_block_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Content Block Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ContentBlock" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["content_block"],
+                "summary": "Update Content Block By Id",
+                "description": "Update a content block by id.\n\nArgs:\n    form_id (int): Id of the form.\n    content_block_id (int): Id of the content block to be updated.\n    content_block (ContentBlock): Content block with updated values.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ContentBlock: The updated content block.",
+                "operationId": "update_content_block_by_id_content_blocks__content_block_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "content_block_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Content Block Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ContentBlock" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ContentBlock" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["content_block"],
+                "summary": "Delete Content Block By Id",
+                "description": "Delete a content block by id.\n\nArgs:\n    form_id (int): Id of the form.\n    content_block_id (int): Id of the content block to be deleted.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ContentBlock: The deleted content block.",
+                "operationId": "delete_content_block_by_id_content_blocks__content_block_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "content_block_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Content Block Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ContentBlock" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/form/{form_id}/public_link": {
+            "get": {
+                "tags": ["public_link"],
+                "summary": "Get Public Links",
+                "description": "Get all public links of a form.\n\nArgs:\n    form_id (int): Id of the form.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    List[FormPublickLink]: The list of public links of the form.",
+                "operationId": "get_public_links_form__form_id__public_link_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Form Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "$ref": "#/components/schemas/FormPublickLink" },
+                                    "title": "Response Get Public Links Form  Form Id  Public Link Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["public_link"],
+                "summary": "Create Public Link",
+                "description": "Create a public link to a form.\n\nArgs:\n    form_id (int): Id of the form.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    FormPublickLink: The created public link.",
+                "operationId": "create_public_link_form__form_id__public_link_post",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Form Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": { "schema": { "$ref": "#/components/schemas/FormPublicRequest" } }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/FormPublickLink" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/public_link/{public_link_id}": {
+            "get": {
+                "tags": ["public_link"],
+                "summary": "Get Public Link By Id",
+                "description": "Get a public link by id.\n\nArgs:\n    form_id (int): Id of the form.\n    public_link_id (int): Id of the public link.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    FormPublickLink: Public link matching the given id.",
+                "operationId": "get_public_link_by_id_public_link__public_link_id__get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "public_link_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/FormPublickLink" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["public_link"],
+                "summary": "Update Public Link By Id",
+                "description": "Update a public link by id.\n\nArgs:\n    form_id (int): Id of the form.\n    public_link_id (int): Id of the public link to be updated.\n    public_link (FormPublickLink): Public link with updated values.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    FormPublickLink: The updated public link.",
+                "operationId": "update_public_link_by_id_public_link__public_link_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "public_link_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FormPublickLink" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/FormPublickLink" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["public_link"],
+                "summary": "Delete Public Link By Id",
+                "description": "Delete a public link by id.\n\nArgs:\n    form_id (int): Id of the form.\n    public_link_id (int): Id of the public link to be deleted.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    FormPublickLink: The deleted public link.",
+                "operationId": "delete_public_link_by_id_public_link__public_link_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "public_link_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/FormPublickLink" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/public_link/{public_link_id}/members": {
+            "get": {
+                "tags": ["public_link_member"],
+                "summary": "Get Public Link Members",
+                "description": "Get all members of a public link.\n\nArgs:\n    form_id (int): Id of the form.\n    public_link_id (int): Id of the public link.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    List[PublicLinkMember]: The list of members of the public link.",
+                "operationId": "get_public_link_members_public_link__public_link_id__members_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "public_link_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "$ref": "#/components/schemas/PublicLinkMember" },
+                                    "title": "Response Get Public Link Members Public Link  Public Link Id  Members Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["public_link_member"],
+                "summary": "Create Public Link Member",
+                "description": "Create a member to a public link.\n\nArgs:\n    form_id (int): Id of the form.\n    public_link_id (int): Id of the public link.\n    public_link_member (PublicLinkMember): Member to be created.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    PublicLinkMember: The created member.",
+                "operationId": "create_public_link_member_public_link__public_link_id__members_post",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "public_link_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PublicLinkMember" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/PublicLinkMember" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/public_link/{public_link_id}/members/{public_link_member_id}": {
+            "patch": {
+                "tags": ["public_link_member"],
+                "summary": "Update Public Link Member By Id",
+                "description": "Update a member by id.\n\nArgs:\n    form_id (int): Id of the form.\n    public_link_id (int): Id of the public link.\n    public_link_member_id (int): Id of the member to be updated.\n    public_link_member (PublicLinkMember): Member with updated values.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    PublicLinkMember: The updated member.",
+                "operationId": "update_public_link_member_by_id_public_link__public_link_id__members__public_link_member_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "public_link_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Id" }
+                    },
+                    {
+                        "name": "public_link_member_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Member Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PublicLinkMember" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/PublicLinkMember" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["public_link_member"],
+                "summary": "Delete Public Link Member By Id",
+                "description": "Delete a member by id.\n\nArgs:\n    form_id (int): Id of the form.\n    public_link_id (int): Id of the public link.\n    public_link_member_id (int): Id of the member to be deleted.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    PublicLinkMember: The deleted member.",
+                "operationId": "delete_public_link_member_by_id_public_link__public_link_id__members__public_link_member_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "public_link_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Id" }
+                    },
+                    {
+                        "name": "public_link_member_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Public Link Member Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/PublicLinkMember" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/public/form/{public_link_hash}": {
+            "get": {
+                "tags": ["public_link"],
+                "summary": "Get Public Link Form",
+                "description": "Get the form of a public link.\n\nArgs:\n    form_id (int): Id of the form.\n    public_link_id (int): Id of the public link.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    Form: The form of the public link.",
+                "operationId": "get_public_link_form_public_form__public_link_hash__get",
+                "parameters": [
+                    {
+                        "name": "public_link_hash",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string", "title": "Public Link Hash" }
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Token" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/PublicFormResponse" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/public/form/{public_link_hash}/resend_token": {
+            "post": {
+                "tags": ["public_link"],
+                "summary": "Resend Public Link Code",
+                "description": "Resend the access code for a public link.\n\nArgs:\n    public_link_hash (str): Hash of the public link.\n    email (str): Email of the user to resend the code.\n    db (SessionDep): Database session.\n    background_tasks (BackgroundTasks): Background tasks.\n\nReturns:\n    Response: A response with a status code of 200 if the email was sent successfully.",
+                "operationId": "resend_public_link_code_public_form__public_link_hash__resend_token_post",
+                "parameters": [
+                    {
+                        "name": "public_link_hash",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string", "title": "Public Link Hash" }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": { "type": "string", "title": "Email" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/public/form/{public_link_hash}/send": {
+            "post": {
+                "tags": ["public_link"],
+                "summary": "Send Form Answers",
+                "description": "Send form answers for a public link.\n\nArgs:\n    public_link_hash (str): Hash of the public link.\n    data (list[FormSendAnswer]): List of form answers to be sent.\n    db (SessionDep): Database session.\n    background_tasks (BackgroundTasks): Background tasks for async operations.\n\nReturns:\n    Response: HTTP response indicating the status of the request.",
+                "operationId": "send_form_answers_public_form__public_link_hash__send_post",
+                "parameters": [
+                    {
+                        "name": "public_link_hash",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string", "title": "Public Link Hash" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": { "$ref": "#/components/schemas/FormSendAnswer" },
+                                "title": "Data"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/folder_report": {
+            "post": {
+                "tags": ["reports", "folder_report"],
+                "summary": "Create Folder Report",
+                "operationId": "create_folder_report_folder_report_post",
+                "requestBody": {
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FolderReport" } } },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FolderReport" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                },
+                "security": [{ "OAuth2PasswordBearer": [] }]
+            }
+        },
+        "/folder_report/{folder_report_id}": {
+            "patch": {
+                "tags": ["reports", "folder_report"],
+                "summary": "Update Folder Report",
+                "operationId": "update_folder_report_folder_report__folder_report_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "folder_report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Folder Report Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FolderReport" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FolderReport" } } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["reports", "folder_report"],
+                "summary": "Delete Folder Report",
+                "operationId": "delete_folder_report_folder_report__folder_report_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "folder_report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Folder Report Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Reports",
+                "description": "Get all reports of the current user.\n\nArgs:\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    List[Report]: The list of reports of the current user.",
+                "operationId": "get_reports_reports_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "folder_report_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Report Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "anyOf": [
+                                            { "$ref": "#/components/schemas/ReportResponse" },
+                                            { "$ref": "#/components/schemas/FolderResponse" }
+                                        ]
+                                    },
+                                    "title": "Response Get Reports Reports Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["reports"],
+                "summary": "Create Report",
+                "description": "Create a report.\n\nArgs:\n    report (Report): Report to be created.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ReportResponse: The created report.",
+                "operationId": "create_report_reports_post",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Report" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/ReportResponse" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Report",
+                "description": "Get a report by id.\n\nArgs:\n    report_id (int): Id of the report to be retrieved.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    Report: The report matching the given id.\n\nRaises:\n    HTTPException: If the report is not found.",
+                "operationId": "get_report_reports__report_id__get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/ReportResponse" } }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["reports"],
+                "summary": "Update Report",
+                "description": "Update a report by id.\n\nArgs:\n    report_id (int): Id of the report to be updated.\n    report (Report): Report object with updated values.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    Report: The updated report.\n\nRaises:\n    HTTPException: If the report is not found.",
+                "operationId": "update_report_reports__report_id__patch",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Report" } } }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["reports"],
+                "summary": "Delete Report",
+                "description": "Delete a report by id.\n\nArgs:\n    report_id (int): Id of the report to be deleted.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    Response: HTTP response with status code 204 for successful deletion.",
+                "operationId": "delete_report_reports__report_id__delete",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}/analytics": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Report Anlytics",
+                "description": "\"\nGet report analytics.\n\nArgs:\n    report_id (int): Id of the report.\n    start_date (str): Start date of the report.\n    end_date (str): End date of the report.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n\nReturns:\n    ReportResponse: Report analytics.",
+                "operationId": "get_report_anlytics_reports__report_id__analytics_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Start Date" }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "End Date" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}/pageviews_analytics": {
+            "get": {
+                "tags": ["reports", "pageviews"],
+                "summary": "Get Pageviews Anlytics",
+                "description": "Get the pageviews analytics of a report.\n\nArgs:\n    report_id (int): Id of the report to be retrieved.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n    start_date (str | None): Start date of the period. Defaults to None.\n    end_date (str | None): End date of the period. Defaults to None.\n\nReturns:\n    dict: The pageviews analytics of the report.\n\nRaises:\n    HTTPException: If the report is not found.",
+                "operationId": "get_pageviews_anlytics_reports__report_id__pageviews_analytics_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Start Date" }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "End Date" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}/nps_analytics": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Nps Anlytics",
+                "description": "Get the NPS analytics of a report.\n\nArgs:\n    report_id (int): Id of the report to be retrieved.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n    start_date (str | None): Start date of the period. Defaults to None.\n    end_date (str | None): End date of the period. Defaults to None.\n\nReturns:\n    dict: The NPS analytics of the report.\n\nRaises:\n    HTTPException: If the report is not found.",
+                "operationId": "get_nps_anlytics_reports__report_id__nps_analytics_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Start Date" }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "End Date" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}/feedback_analytics": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Feedback Anlytics",
+                "description": "Get feedback analytics for a specific report.\n\nArgs:\n    report_id (int): Id of the report.\n    db (SessionDep): Database session.\n    user (CurrentUser): Current user.\n    start_date (str | None, optional): Start date for filtering feedback. Defaults to None.\n    end_date (str | None, optional): End date for filtering feedback. Defaults to None.\n\nReturns:\n    dict: Feedback analytics including total feedback count, score distribution,\n          average score, and feedback entries.\n\nRaises:\n    HTTPException: If the report is not found.",
+                "operationId": "get_feedback_anlytics_reports__report_id__feedback_analytics_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Start Date" }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "End Date" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}/activity_analytics": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Activity Anlytics",
+                "operationId": "get_activity_anlytics_reports__report_id__activity_analytics_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Start Date" }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "End Date" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}/activity_analytics_details": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Activity Anlytics Detais",
+                "operationId": "get_activity_anlytics_detais_reports__report_id__activity_analytics_details_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Start Date" }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "End Date" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}/video_analytics": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Video Anlytics",
+                "operationId": "get_video_anlytics_reports__report_id__video_analytics_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Start Date" }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "End Date" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/{report_id}/video_analytics_details": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Get Video Analytics Details",
+                "operationId": "get_video_analytics_details_reports__report_id__video_analytics_details_get",
+                "security": [{ "OAuth2PasswordBearer": [] }],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer", "title": "Report Id" }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Start Date" }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "End Date" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } }
+                        }
+                    }
+                }
+            }
+        },
+        "/run_analytics": {
+            "get": {
+                "tags": ["reports"],
+                "summary": "Run Analytics",
+                "operationId": "run_analytics_run_analytics_get",
+                "responses": {
+                    "200": { "description": "Successful Response", "content": { "application/json": { "schema": {} } } }
+                },
+                "security": [{ "OAuth2PasswordBearer": [] }]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ContentBlock": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "content": {
+                        "anyOf": [{ "additionalProperties": true, "type": "object" }, { "type": "null" }],
+                        "title": "Content"
+                    },
+                    "type": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Type" },
+                    "order": { "type": "integer", "title": "Order", "default": 0 },
+                    "settings": {
+                        "anyOf": [{ "additionalProperties": true, "type": "object" }, { "type": "null" }],
+                        "title": "Settings"
+                    },
+                    "form_id": { "type": "integer", "title": "Form Id" },
+                    "content_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Content Id" }
+                },
+                "type": "object",
+                "required": ["form_id", "content_id"],
+                "title": "ContentBlock",
+                "description": "Content block of a form"
+            },
+            "FolderReport": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Updated At"
+                    },
+                    "user_id": { "type": "integer", "title": "User Id" },
+                    "folder_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" }
+                },
+                "type": "object",
+                "required": ["name", "created_at", "updated_at", "user_id"],
+                "title": "FolderReport"
+            },
+            "FolderResponse": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Updated At"
+                    },
+                    "user_id": { "type": "integer", "title": "User Id" },
+                    "folder_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" },
+                    "type": { "type": "string", "title": "Type", "default": "folder" }
+                },
+                "type": "object",
+                "required": ["id", "name", "created_at", "updated_at", "user_id", "folder_id"],
+                "title": "FolderResponse"
+            },
+            "Form": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "public_name": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Public Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Updated At"
+                    },
+                    "start_date": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Start Date"
+                    },
+                    "end_date": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "End Date"
+                    },
+                    "settings": {
+                        "anyOf": [{ "additionalProperties": true, "type": "object" }, { "type": "null" }],
+                        "title": "Settings"
+                    },
+                    "status": {
+                        "anyOf": [{ "$ref": "#/components/schemas/FormStatus" }, { "type": "null" }],
+                        "default": "draft"
+                    },
+                    "user_id": { "type": "integer", "title": "User Id" },
+                    "folder_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" }
+                },
+                "type": "object",
+                "required": ["name", "created_at", "updated_at", "user_id"],
+                "title": "Form",
+                "description": "Form model"
+            },
+            "FormAnswerResponse": {
+                "properties": {
+                    "answers": { "additionalProperties": true, "type": "object", "title": "Answers" },
+                    "total": { "type": "integer", "title": "Total" }
+                },
+                "type": "object",
+                "required": ["answers", "total"],
+                "title": "FormAnswerResponse",
+                "description": "Report of a form"
+            },
+            "FormFolder": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Updated At"
+                    },
+                    "user_id": { "type": "integer", "title": "User Id" },
+                    "folder_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" }
+                },
+                "type": "object",
+                "required": ["name", "created_at", "updated_at", "user_id"],
+                "title": "FormFolder"
+            },
+            "FormFolderResponse": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Updated At"
+                    },
+                    "user_id": { "type": "integer", "title": "User Id" },
+                    "folder_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" },
+                    "type": { "type": "string", "title": "Type", "default": "folder" }
+                },
+                "type": "object",
+                "required": ["id", "name", "created_at", "updated_at", "user_id", "folder_id"],
+                "title": "FormFolderResponse"
+            },
+            "FormPublicRequest": {
+                "properties": {
+                    "is_private": { "type": "boolean", "title": "Is Private", "default": false },
+                    "members": { "items": { "type": "string" }, "type": "array", "title": "Members" }
+                },
+                "type": "object",
+                "required": ["members"],
+                "title": "FormPublicRequest",
+                "description": "Report of a form"
+            },
+            "FormPublickLink": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "hash": { "type": "string", "format": "uuid", "title": "Hash" },
+                    "is_private": { "type": "boolean", "title": "Is Private", "default": false },
+                    "form_id": { "type": "integer", "title": "Form Id" }
+                },
+                "type": "object",
+                "required": ["form_id"],
+                "title": "FormPublickLink",
+                "description": "Public link to a form"
+            },
+            "FormResponse": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "public_name": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Public Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Updated At"
+                    },
+                    "start_date": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Start Date"
+                    },
+                    "end_date": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "End Date"
+                    },
+                    "settings": {
+                        "anyOf": [{ "additionalProperties": true, "type": "object" }, { "type": "null" }],
+                        "title": "Settings"
+                    },
+                    "status": { "anyOf": [{ "$ref": "#/components/schemas/FormStatus" }, { "type": "null" }] },
+                    "type": { "type": "string", "title": "Type", "default": "form" },
+                    "user_id": { "type": "integer", "title": "User Id" },
+                    "folder_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "public_name",
+                    "created_at",
+                    "updated_at",
+                    "start_date",
+                    "end_date",
+                    "settings",
+                    "status",
+                    "user_id"
+                ],
+                "title": "FormResponse"
+            },
+            "FormSendAnswer": {
+                "properties": {
+                    "answers": { "additionalProperties": true, "type": "object", "title": "Answers" },
+                    "content_id": { "type": "integer", "title": "Content Id" }
+                },
+                "type": "object",
+                "required": ["answers", "content_id"],
+                "title": "FormSendAnswer",
+                "description": "Report of a form"
+            },
+            "FormStatus": { "type": "string", "enum": ["draft", "published", "archived"], "title": "FormStatus" },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": { "$ref": "#/components/schemas/ValidationError" },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "PublicFormResponse": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "public_name": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Public Name" },
+                    "start_date": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Start Date"
+                    },
+                    "end_date": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "End Date"
+                    },
+                    "settings": {
+                        "anyOf": [{ "additionalProperties": true, "type": "object" }, { "type": "null" }],
+                        "title": "Settings"
+                    },
+                    "status": {
+                        "anyOf": [{ "$ref": "#/components/schemas/FormStatus" }, { "type": "null" }],
+                        "default": "draft"
+                    },
+                    "content_blocks": {
+                        "items": { "$ref": "#/components/schemas/ContentBlock" },
+                        "type": "array",
+                        "title": "Content Blocks"
+                    }
+                },
+                "type": "object",
+                "required": ["name", "content_blocks"],
+                "title": "PublicFormResponse",
+                "description": "Report of a form"
+            },
+            "PublicLinkMember": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "email": { "type": "string", "title": "Email" },
+                    "code": { "type": "string", "title": "Code" },
+                    "public_link_id": { "type": "integer", "title": "Public Link Id" }
+                },
+                "type": "object",
+                "required": ["email", "code", "public_link_id"],
+                "title": "PublicLinkMember",
+                "description": "Members of a public link"
+            },
+            "Report": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "user_id": { "type": "integer", "title": "User Id" },
+                    "folder_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" }
+                },
+                "type": "object",
+                "required": ["name", "created_at", "user_id", "folder_id"],
+                "title": "Report"
+            },
+            "ReportResponse": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "scripts": {
+                        "items": { "$ref": "#/components/schemas/Script" },
+                        "type": "array",
+                        "title": "Scripts",
+                        "default": []
+                    },
+                    "user_id": { "type": "integer", "title": "User Id" },
+                    "folder_id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Folder Id" },
+                    "type": { "type": "string", "title": "Type", "default": "report" }
+                },
+                "type": "object",
+                "required": ["id", "name", "created_at", "user_id", "folder_id"],
+                "title": "ReportResponse"
+            },
+            "Script": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "hash": { "type": "string", "format": "uuid", "title": "Hash" },
+                    "report_id": { "type": "integer", "title": "Report Id" }
+                },
+                "type": "object",
+                "required": ["name", "created_at", "report_id"],
+                "title": "Script"
+            },
+            "TemplateContentBlock": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "content": {
+                        "anyOf": [{ "additionalProperties": true, "type": "object" }, { "type": "null" }],
+                        "title": "Content"
+                    },
+                    "type": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Type" },
+                    "order": { "type": "integer", "title": "Order", "default": 0 },
+                    "settings": {
+                        "anyOf": [{ "additionalProperties": true, "type": "object" }, { "type": "null" }],
+                        "title": "Settings"
+                    },
+                    "template_form_id": { "type": "integer", "title": "Template Form Id" }
+                },
+                "type": "object",
+                "required": ["template_form_id"],
+                "title": "TemplateContentBlock",
+                "description": "Content block of a form"
+            },
+            "TemplateForm": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "name": { "type": "string", "title": "Name" },
+                    "description": { "type": "string", "title": "Description" },
+                    "is_active": { "type": "boolean", "title": "Is Active", "default": true },
+                    "created_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+                        "title": "Updated At"
+                    }
+                },
+                "type": "object",
+                "required": ["name", "description", "created_at", "updated_at"],
+                "title": "TemplateForm"
+            },
+            "User": {
+                "properties": {
+                    "id": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Id" },
+                    "username": { "type": "string", "title": "Username" },
+                    "email": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Email" },
+                    "full_name": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Full Name" },
+                    "disabled": {
+                        "anyOf": [{ "type": "boolean" }, { "type": "null" }],
+                        "title": "Disabled",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": ["username"],
+                "title": "User"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": { "type": "string", "title": "Message" },
+                    "type": { "type": "string", "title": "Error Type" }
+                },
+                "type": "object",
+                "required": ["loc", "msg", "type"],
+                "title": "ValidationError"
+            }
+        },
+        "securitySchemes": {
+            "OAuth2PasswordBearer": {
+                "type": "oauth2",
+                "flows": { "password": { "scopes": {}, "tokenUrl": "auth/token" } }
+            }
+        }
+    }
+}
