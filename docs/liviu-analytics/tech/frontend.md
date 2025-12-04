@@ -12,13 +12,13 @@ Esta página descreve a visão técnica do frontend: responsabilidades, arquitet
 
 O frontend do Liviu Analytics é uma aplicação web moderna construída com:
 
--   **Framework SPA/SSR:** [...] (ex.: React, Next.js, Vue)
+-   **Framework SPA/SSR:** React
 -   **Linguagem:** TypeScript / JavaScript
--   **Estilização:** [...] (ex.: CSS Modules, Tailwind, Styled Components)
--   **Gráficos:** [...] (ex.: Recharts, ECharts, Chart.js)
+-   **Estilização:** Styled Components
+-   **Gráficos:** Recharts
 -   **Comunicação com API:** HTTP/REST via fetch/Axios
--   **Gerenciamento de estado:** [...] (ex.: Zustand, Redux, Context API)
--   **Build/Empacotamento:** [...] (ex.: Vite, Webpack, Next build)
+-   **Gerenciamento de estado:** Context API
+-   **Build/Empacotamento:** Vite
 
 A aplicação é entregue como **SPA (Single Page Application)** ou app SSR estático, consumindo apenas a **API Liviu Analytics**.
 

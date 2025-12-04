@@ -323,12 +323,3 @@ O sistema aplica:
 -   Relatórios dependem do período selecionado.
 -   Dados podem ter atraso em ambientes com sincronização agendada.
 
----
-
-# 12. Documentos Relacionados
-
--   Primeiros Passos — `../user/primeiros-passos.md`
--   Guia do Usuário — `../user/guia-do-usuario.md`
--   Frontend — `frontend.md`
--   API Analytics — `api.md`
--   FAQ — `../user/faq.md`

@@ -84,8 +84,6 @@ nav:
         - Arquitetura: liviu-content/tech/architecture.md
         - Frontend: liviu-content/tech/frontend.md
         - API: liviu-content/tech/api.md
-        - Banco de dados: liviu-content/tech/database.md
-        - Integrações: liviu-content/tech/integrations.md
 
   - Liviu Flow:
       - Usuário: 
@@ -97,5 +95,3 @@ nav:
         - Arquitetura: liviu-flow/tech/architecture.md
         - Frontend: liviu-flow/tech/frontend.md
         - API: liviu-flow/tech/api.md
-        - Banco de dados: liviu-flow/tech/database.md
-        - Integrações: liviu-flow/tech/integrations.md
