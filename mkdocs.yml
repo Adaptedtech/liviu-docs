@@ -61,6 +61,7 @@ extra_javascript:
   
 nav:
   - Início: index.md
+  - Quickstart: quickstart.md
 
   - Liviu Analytics:
       - Usuário:
@@ -77,6 +78,7 @@ nav:
   - Liviu Content:
       - Usuário:
         - Visão geral: liviu-content/index.md
+        - Primeiros passos: liviu-content/user/first-access.md
         - Guia do usuário: liviu-content/user/user-guide.md
         - Fluxos: liviu-content/user/flow.md
         - FAQ: liviu-content/user/faq.md
@@ -88,6 +90,7 @@ nav:
   - Liviu Flow:
       - Usuário: 
         - Visão geral: liviu-flow/index.md
+        - Primeiros passos: liviu-flow/user/first-access.md
         - Guia do usuário: liviu-flow/user/user-guide.md
         - Fluxos: liviu-flow/user/flow.md
         - FAQ: liviu-flow/user/faq.md

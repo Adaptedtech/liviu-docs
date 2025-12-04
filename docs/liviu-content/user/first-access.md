@@ -1,11 +1,11 @@
-# 🚀 Primeiros Passos — Liviu Content
+# Primeiros Passos — Liviu Content
 
 Bem-vindo ao **Liviu Content**, a plataforma de criação e gestão de conteúdos educacionais do ecossistema AdaptEdTech.  
 Este guia foi criado para ajudar você a começar rapidamente, entender a interface e saber onde ficam as principais funções.
 
 ---
 
-## 🧭 1. Acesso à Plataforma
+## Acesso à Plataforma
 
 1. Acesse a URL oficial do Liviu Content:  
    **https://content.adaptedtech.com** (ou endereço da sua instituição)
@@ -20,7 +20,7 @@ Este guia foi criado para ajudar você a começar rapidamente, entender a interf
 
 ---
 
-## 📚 2. Criar seu Primeiro Conteúdo
+## Criar seu Primeiro Conteúdo
 
 Para criar um novo material:
 
@@ -36,11 +36,11 @@ Para criar um novo material:
 
 ---
 
-## ✏️ 3. Conhecendo o Editor
+## Conhecendo o Editor
 
 O editor possui três áreas principais:
 
-### **🧱 (A) Painel de Edição**
+### ** (A) Painel de Edição**
 
 Onde você escreve e monta o conteúdo usando blocos:
 
@@ -54,7 +54,7 @@ Onde você escreve e monta o conteúdo usando blocos:
 -   Questões
 -   Blocos personalizados da AdaptEdTech
 
-### **🗂 (B) Navegação de Seções**
+### ** (B) Navegação de Seções**
 
 Árvore estrutural do conteúdo:
 
@@ -65,7 +65,7 @@ Onde você escreve e monta o conteúdo usando blocos:
 
 Use arrastar & soltar (drag & drop) para reorganizar.
 
-### **⚙️ (C) Configurações**
+### ** (C) Configurações**
 
 Ajustes como:
 
@@ -79,7 +79,7 @@ Ajustes como:
 
 ---
 
-## 🗂 4. Criar a Estrutura do Conteúdo
+## Criar a Estrutura do Conteúdo
 
 Você pode montar um conteúdo dividido em:
 
@@ -107,7 +107,7 @@ Curso Onboarding →
 
 ---
 
-## 5. Trabalhando com Blocos
+## Trabalhando com Blocos
 
 O Liviu Content utiliza componentes modulares.
 
@@ -134,7 +134,7 @@ Adicionar um bloco é simples:
 
 ---
 
-## 6. Colaboração e Revisão
+## Colaboração e Revisão
 
 O Liviu Content permite que equipes trabalhem juntas.
 
@@ -155,7 +155,7 @@ Funções disponíveis:
 
 ---
 
-## 7. Publicando seu Conteúdo
+## Publicando seu Conteúdo
 
 1. Quando o conteúdo estiver pronto:
 2. Clique em “Publicar”.
@@ -170,7 +170,7 @@ O conteúdo será instalado automaticamente no LMS.
 
 ---
 
-## 8. Exportações (Opcional)
+## Exportações (Opcional)
 
 Dependendo da configuração da sua empresa, é possível exportar o conteúdo em:
 
@@ -182,7 +182,7 @@ Use o menu **“Exportar”**.
 
 ---
 
-## 9. Acompanhando o Desempenho no Analytics
+## Acompanhando o Desempenho no Analytics
 
 Depois da publicação:
 
@@ -203,10 +203,13 @@ Para ver as métricas:
     - Conclusão
     - Performance
 
-## 10. Suporte e Ajuda
+---
+
+## Suporte e Ajuda
 
 Se precisar de ajuda:
-- Consulte o Guia Completo do Usuário
-- Abra um chamado no suporte AdaptEdTech
-- Verifique os tutoriais em vídeo
-- Veja modelos de conteúdo disponíveis nos templates
+
+-   Consulte o Guia Completo do Usuário
+-   Abra um chamado no suporte AdaptEdTech
+-   Verifique os tutoriais em vídeo
+-   Veja modelos de conteúdo disponíveis nos templates
